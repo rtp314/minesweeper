@@ -1,5 +1,8 @@
 import Minefield from './Minefield';
 
+const flagImg = '<img class="icon" src="images/flag.svg" />';
+const bombImg = '<img class="icon" src="/images/bomb.png" />';
+
 export default class Cell {
   x: number;
   y: number;
@@ -71,16 +74,27 @@ export default class Cell {
   public explode() {
     this.parent.explode(this.x, this.y);
     this.element!.classList.add('exploded');
-    this.element!.innerText = 'X';
+    this.element!.innerHTML = bombImg;
   }
 
   private toggleFlag() {
     if (this.flagged) {
       this.flagged = false;
-      this.element!.innerText = '';
+      this.element!.innerHTML = '';
     } else {
       this.flagged = true;
-      this.element!.innerHTML = '<img class="flag" src="images/flag.svg" />';
+      this.element!.innerHTML = flagImg;
+    }
+  }
+
+  public endGame({ win }: { win: boolean }) {
+    this.frozen = true;
+    if (this.containsBomb && !this.flagged && !this.clicked) {
+      if (win) {
+        this.element!.innerHTML = flagImg;
+      } else {
+        this.element!.innerHTML = bombImg;
+      }
     }
   }
 }

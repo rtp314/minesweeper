@@ -57,7 +57,7 @@ export default class Minefield {
   public explode(x: number, y: number) {
     console.log(x, y, 'exploded!');
     this.buttonElement.classList.add('game-lost');
-    this.endGame();
+    this.endGame({ win: false });
   }
 
   public increment() {
@@ -65,7 +65,7 @@ export default class Minefield {
     this.minesRemainingDiv.innerText = this.remainingCells.toString().padStart(3, '0');
     if (this.remainingCells === 0) {
       this.buttonElement.classList.add('game-won');
-      this.endGame();
+      this.endGame({ win: true });
     }
   }
 
@@ -110,11 +110,13 @@ export default class Minefield {
     });
   }
 
-  private endGame() {
-    this.children.forEach(column => {
-      column.forEach(cell => (cell.frozen = true));
-    });
+  private endGame({ win }: { win: boolean }) {
+    this.forEachChild(cell => cell.endGame({ win }));
     this.timerIntervalId && clearInterval(this.timerIntervalId);
+  }
+
+  private forEachChild(fn: (cell: Cell) => void) {
+    this.children.forEach(column => column.forEach(cell => fn(cell)));
   }
 
   public reset() {

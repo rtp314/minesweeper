@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'DSEG Classic';
-  src: local('DSEG7Classic-Bold.woff2'), url('../public/fonts/DSEG7Classic-Bold.woff2');
+  src: local('DSEG7Classic-Bold.woff2'), url('/fonts/DSEG7Classic-Bold.woff2');
 }
 
 @font-face {
   font-family: 'Windows 95';
-  src: url('../public/fonts/w95fa.woff2');
+  src: url('/fonts/w95fa.woff2');
 }
 
 * {
@@ -22,20 +22,30 @@ body {
   font-family: 'Windows 95';
 }
 
+#game {
+  background-color: lightgrey;
+  display: inline-block;
+}
+
 .wrapper {
   display: inline-block;
   width: fit-content;
   margin: auto;
   padding: 5px;
-  background-color: lightgrey;
 }
 
 #menu {
-  padding: 2px;
+  padding: 5px;
+  padding-top: 10px;
 
   & > span {
+    display: inline-block;
     margin-left: 1em;
     padding: 3px 0;
+
+    &:first-letter {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -48,10 +58,12 @@ body {
 
 #new-game-button {
   --image-position: top left;
+  border-radius: 0px;
+  border: solid 1px var(--color-edge-lowlight);
 
   & > span {
     display: inline-block;
-    background-image: url('../public/images/all_faces.webp');
+    background-image: url('/images/all_faces.webp');
     background-size: 38px;
     background-position: var(--image-position);
     width: 17px;
@@ -129,7 +141,7 @@ $colors_by_value: (
   }
 }
 
-.flag {
+.icon {
   height: 100%;
   width: 100%;
 }

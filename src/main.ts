@@ -26,7 +26,7 @@ const presetOptions = {
 
 const defaultOptions = {
   parent: minefieldDiv,
-  ...presetOptions.hard,
+  ...presetOptions.easy,
 };
 
 let oldMinefield: Minefield = new Minefield(defaultOptions);
