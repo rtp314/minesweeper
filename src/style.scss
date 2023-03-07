@@ -1,0 +1,155 @@
+@font-face {
+  font-family: 'DSEG Classic';
+  src: local('DSEG7Classic-Bold.woff2'), url('../public/fonts/DSEG7Classic-Bold.woff2');
+}
+
+@font-face {
+  font-family: 'Windows 95';
+  src: url('../public/fonts/w95fa.woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-background: lightgrey;
+  --color-edge-highlight: white;
+  --color-edge-lowlight: grey;
+}
+
+body {
+  font-family: 'Windows 95';
+}
+
+.wrapper {
+  display: inline-block;
+  width: fit-content;
+  margin: auto;
+  padding: 5px;
+  background-color: lightgrey;
+}
+
+#menu {
+  padding: 2px;
+
+  & > span {
+    margin-left: 1em;
+    padding: 3px 0;
+  }
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 3px;
+}
+
+#new-game-button {
+  --image-position: top left;
+
+  & > span {
+    display: inline-block;
+    background-image: url('../public/images/all_faces.webp');
+    background-size: 38px;
+    background-position: var(--image-position);
+    width: 17px;
+    height: 17px;
+  }
+
+  &.game-won > span {
+    background-position: bottom left !important;
+  }
+  &.game-lost > span {
+    background-position: bottom right !important;
+  }
+}
+
+.data-display {
+  display: inline-block;
+  font-family: 'DSEG Classic';
+  color: red;
+  background-color: black;
+  padding: 0.5em;
+}
+
+#minefield {
+  margin-top: 5px;
+  display: inline-flex;
+  flex-direction: row;
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.cell {
+  width: 1.2rem;
+  height: 1.2rem;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.hidden {
+  border: solid 1px var(--color-edge-lowlight);
+  border-top: solid var(--color-edge-highlight) 1px;
+  border-left: solid var(--color-edge-highlight) 1px;
+  background-color: var(--color-background);
+}
+
+.revealed {
+  background-color: rgb(231, 231, 231);
+  border: dashed 1px rgb(170, 170, 170);
+}
+
+.exploded {
+  background-color: red;
+}
+
+$colors_by_value: (
+  1: blue,
+  2: green,
+  3: red,
+  4: rgb(85, 0, 110),
+  5: rgb(100, 57, 1),
+  6: teal,
+  7: black,
+  8: grey,
+);
+
+@each $key, $value in $colors_by_value {
+  .cell[data-value='#{$key}'] {
+    color: $value;
+  }
+}
+
+.flag {
+  height: 100%;
+  width: 100%;
+}
+
+.edge-highlight {
+  border: solid 2px var(--color-edge-lowlight);
+  border-top: solid var(--color-edge-highlight) 1px;
+  border-left: solid var(--color-edge-highlight) 1px;
+}
+
+.edge-highlight-reverse {
+  border: solid 2px var(--color-edge-lowlight);
+  border-bottom: solid var(--color-edge-highlight) 1px;
+  border-right: solid var(--color-edge-lowlight) 1px;
+}
+
+.thin-border {
+  border-width: 1px;
+}
+
+.thick-border {
+  border-width: 3px;
+}

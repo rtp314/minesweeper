@@ -7,7 +7,15 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div class="wrapper edge-highlight thick-border">
+      <div id="menu"><span>Game</span><span>Help</span></div>
+      <div id="controls" class="edge-highlight-reverse">
+        <div id="mines-remaining" class="data-display edge-highlight-reverse thin-border">000</div>
+        <button id="new-game-button" class="edge-highlight-reverse" aria-label="new game"><span></span></button>
+        <div id="time-elapsed" class="data-display edge-highlight-reverse thin-border">000</div>
+      </div>
+      <div id="minefield" class="edge-highlight-reverse"></div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
