@@ -17,6 +17,7 @@ export default class Minefield {
   timerIntervalId: number | null = null;
 
   constructor({ parent, width, height, numberOfMines = 20 }: MinefieldInitialiserObject) {
+    console.log(parent);
     this.remainingCells = width * height - numberOfMines;
     this.parent = parent;
     this.minesRemainingDiv = document.getElementById('mines-remaining')!;
