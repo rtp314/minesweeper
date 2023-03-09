@@ -8,6 +8,12 @@
   </head>
   <body>
     <div id="game">
+      <div class="popup edge-highlight">
+        <div class="popup-title-bar">
+          <span>Choose Custom Size</span><button class="close-button edge-highlight">X</button>
+        </div>
+        <div class="popup-content">Choose your settings</div>
+      </div>
       <div id="menu">
         <span class="dropdown-menu-button"
           >Game
@@ -17,7 +23,10 @@
             <button class="difficulty-selector-button" data-difficulty="hard">Hard</button>
             <button class="difficulty-selector-button" data-difficulty="custom">Custom</button>
           </div> </span
-        ><span class="dropdown-menu-button">Help</span>
+        ><span class="dropdown-menu-button"
+          >Help
+          <div class="dropdown-menu"><button>How to play</button><button>About</button></div>
+        </span>
       </div>
       <div class="wrapper edge-highlight thick-border">
         <div id="controls" class="edge-highlight-reverse">

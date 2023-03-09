@@ -24,9 +24,11 @@ export default class MinesweeperGame {
   parentElement: HTMLElement;
   newGameButton: HTMLButtonElement;
   minefieldDiv: HTMLDivElement;
+  dropdownMenuButtons: NodeListOf<HTMLElement>;
   // JS Elements
   gameOptions: MinefieldInitialiserObject;
   minefield: Minefield;
+  dropdownMenuOpen = false;
 
   constructor(parent: HTMLElement) {
     // check that necessary elements are present first, else throw an error
@@ -34,7 +36,14 @@ export default class MinesweeperGame {
     const minefieldDiv = parent.querySelector<HTMLDivElement>('#minefield');
     const dropdownMenuButtons = parent.querySelectorAll<HTMLElement>('.dropdown-menu-button');
     const difficultySelectorButtons = parent.querySelectorAll<HTMLButtonElement>('.difficulty-selector-button');
-    if (!newGameButton || !minefieldDiv || dropdownMenuButtons.length === 0 || difficultySelectorButtons.length === 0) {
+    const menu = parent.querySelector('#menu');
+    if (
+      !newGameButton ||
+      !minefieldDiv ||
+      !menu ||
+      dropdownMenuButtons.length === 0 ||
+      difficultySelectorButtons.length === 0
+    ) {
       throw new Error('missing elements, please check html');
     }
 
@@ -44,14 +53,26 @@ export default class MinesweeperGame {
     this.parentElement = parent;
     this.gameOptions = { parent: this.minefieldDiv, ...presetOptions.medium };
     this.minefield = new Minefield(this.gameOptions);
+    this.dropdownMenuButtons = dropdownMenuButtons;
 
     // add event listeners
     this.newGameButton.addEventListener('click', () => this.startNewGame());
 
     dropdownMenuButtons.forEach(button => {
-      button.addEventListener('click', event => {
-        // TODO: add dropdown button logic
+      button.addEventListener('click', () => {
+        this.openDropdownMenu(button);
       });
+
+      button.addEventListener('mouseover', () => {
+        if (this.dropdownMenuOpen) {
+          this.openDropdownMenu(button);
+        }
+      });
+    });
+
+    menu.addEventListener('mouseleave', () => {
+      if (!this.dropdownMenuOpen) return;
+      this.closeDropdownMenus();
     });
 
     difficultySelectorButtons.forEach(button => {
@@ -64,6 +85,7 @@ export default class MinesweeperGame {
         } else if (level === 'custom') {
           // TODO: show dialog
         }
+        this.closeDropdownMenus();
       });
     });
   }
@@ -71,5 +93,23 @@ export default class MinesweeperGame {
   public startNewGame() {
     if (this.minefield) this.minefield.reset();
     this.minefield = new Minefield(this.gameOptions);
+  }
+
+  private openDropdownMenu(parent: HTMLElement) {
+    this.dropdownMenuOpen = true;
+    this.dropdownMenuButtons.forEach(button => {
+      const dropdown = button.querySelector<HTMLElement>('.dropdown-menu');
+      if (!dropdown) return;
+      if (button === parent) {
+        dropdown.style.display = 'flex';
+      } else {
+        dropdown.style.display = 'none';
+      }
+    });
+  }
+
+  private closeDropdownMenus() {
+    this.dropdownMenuOpen = false;
+    this.parentElement.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(menu => (menu.style.display = 'none'));
   }
 }

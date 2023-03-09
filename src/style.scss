@@ -10,12 +10,14 @@
 
 * {
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 :root {
   --color-background: lightgrey;
   --color-edge-highlight: white;
   --color-edge-lowlight: grey;
+  --color-title-bar: navy;
 }
 
 body {
@@ -148,13 +150,13 @@ $colors_by_value: (
 }
 
 .edge-highlight {
-  border: solid 2px var(--color-edge-lowlight);
+  border: solid var(--color-edge-lowlight) 1px;
   border-top: solid var(--color-edge-highlight) 1px;
   border-left: solid var(--color-edge-highlight) 1px;
 }
 
 .edge-highlight-reverse {
-  border: solid 2px var(--color-edge-lowlight);
+  border: solid var(--color-edge-lowlight) 1px;
   border-bottom: solid var(--color-edge-highlight) 1px;
   border-right: solid var(--color-edge-lowlight) 1px;
 }
@@ -175,15 +177,48 @@ $colors_by_value: (
   display: none;
   flex-direction: column;
   background-color: var(--color-background);
-  padding: 5px 1rem;
+  padding: 0;
   border: solid 1px black;
+  width: max-content;
 
   & > button {
-    font-family: inherit;
     font-size: inherit;
     border: none;
     background-color: transparent;
     text-align: left;
-    margin: 5px 0;
+    padding: 10px 1rem;
+
+    &:hover {
+      background-color: var(--color-edge-lowlight);
+    }
   }
+}
+
+.popup {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-background);
+
+  & .popup-title-bar {
+    color: var(--color-edge-highlight);
+    background-color: var(--color-title-bar);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    & > span {
+      padding: 0.5rem;
+    }
+  }
+
+  & .popup-content {
+    padding: 1rem;
+  }
+}
+
+.close-button {
+  background-color: var(--color-background);
+  margin: 3px;
+  aspect-ratio: 1;
 }
