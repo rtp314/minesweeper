@@ -194,25 +194,26 @@ $colors_by_value: (
   }
 }
 
-.popup {
+.window {
   position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
   background-color: var(--color-background);
 
-  & .popup-title-bar {
+  & .window-title-bar {
     color: var(--color-edge-highlight);
     background-color: var(--color-title-bar);
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+
     & > span {
+      min-width: max-content;
       padding: 0.5rem;
     }
   }
 
-  & .popup-content {
+  & .window-content {
     padding: 1rem;
   }
 }
@@ -221,4 +222,8 @@ $colors_by_value: (
   background-color: var(--color-background);
   margin: 3px;
   aspect-ratio: 1;
+}
+
+.window-hidden {
+  display: none !important;
 }

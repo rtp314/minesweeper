@@ -1,5 +1,6 @@
 import Minefield from './Minefield';
 import type { MinefieldInitialiserObject } from './Minefield';
+import Window from './Window';
 
 const presetOptions: { [level: string]: any } = {
   easy: {
@@ -29,6 +30,7 @@ export default class MinesweeperGame {
   gameOptions: MinefieldInitialiserObject;
   minefield: Minefield;
   dropdownMenuOpen = false;
+  customSizeWindow: Window | null = null;
 
   constructor(parent: HTMLElement) {
     // check that necessary elements are present first, else throw an error
@@ -82,12 +84,20 @@ export default class MinesweeperGame {
         if (level && presetOptions[level]) {
           this.gameOptions = { ...this.gameOptions, ...presetOptions[level] };
           this.startNewGame();
-        } else if (level === 'custom') {
-          // TODO: show dialog
+        } else if (level === 'custom' && this.customSizeWindow) {
+          this.customSizeWindow.show();
         }
         this.closeDropdownMenus();
       });
     });
+
+    // add Window
+    const popupWindowElement = parent.querySelector<HTMLDivElement>('#custom-size-select');
+    if (popupWindowElement) {
+      this.customSizeWindow = new Window({ element: popupWindowElement });
+    } else {
+      console.error('no custom size selector element found, no custom sizes will be useable');
+    }
   }
 
   public startNewGame() {

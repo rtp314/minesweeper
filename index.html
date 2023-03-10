@@ -7,34 +7,37 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="game">
-      <div class="popup edge-highlight">
-        <div class="popup-title-bar">
-          <span>Choose Custom Size</span><button class="close-button edge-highlight">X</button>
+    <div class="window edge-highlight">
+      <div class="window-title-bar"><span>Minesweeper</span><button class="close-button edge-highlight">X</button></div>
+      <div id="game">
+        <div id="menu">
+          <span class="dropdown-menu-button"
+            >Game
+            <div class="dropdown-menu">
+              <button class="difficulty-selector-button" data-difficulty="easy">Easy</button>
+              <button class="difficulty-selector-button" data-difficulty="medium">Medium</button>
+              <button class="difficulty-selector-button" data-difficulty="hard">Hard</button>
+              <button class="difficulty-selector-button" data-difficulty="custom">Custom</button>
+            </div> </span
+          ><span class="dropdown-menu-button"
+            >Help
+            <div class="dropdown-menu"><button>How to play</button><button>About</button></div>
+          </span>
+          <div id="custom-size-select" class="window edge-highlight window-hidden">
+            <div class="window-title-bar">
+              <span>Custom Size</span><button class="close-button edge-highlight">X</button>
+            </div>
+            <div class="window-content">Choose your size</div>
+          </div>
         </div>
-        <div class="popup-content">Choose your settings</div>
-      </div>
-      <div id="menu">
-        <span class="dropdown-menu-button"
-          >Game
-          <div class="dropdown-menu">
-            <button class="difficulty-selector-button" data-difficulty="easy">Easy</button>
-            <button class="difficulty-selector-button" data-difficulty="medium">Medium</button>
-            <button class="difficulty-selector-button" data-difficulty="hard">Hard</button>
-            <button class="difficulty-selector-button" data-difficulty="custom">Custom</button>
-          </div> </span
-        ><span class="dropdown-menu-button"
-          >Help
-          <div class="dropdown-menu"><button>How to play</button><button>About</button></div>
-        </span>
-      </div>
-      <div class="wrapper edge-highlight thick-border">
-        <div id="controls" class="edge-highlight-reverse">
-          <div id="mines-remaining" class="data-display edge-highlight-reverse thin-border">000</div>
-          <button id="new-game-button" class="edge-highlight-reverse" aria-label="new game"><span></span></button>
-          <div id="time-elapsed" class="data-display edge-highlight-reverse thin-border">000</div>
+        <div class="wrapper edge-highlight thick-border">
+          <div id="controls" class="edge-highlight-reverse">
+            <div id="mines-remaining" class="data-display edge-highlight-reverse thin-border">000</div>
+            <button id="new-game-button" class="edge-highlight-reverse" aria-label="new game"><span></span></button>
+            <div id="time-elapsed" class="data-display edge-highlight-reverse thin-border">000</div>
+          </div>
+          <div id="minefield" class="edge-highlight-reverse"></div>
         </div>
-        <div id="minefield" class="edge-highlight-reverse"></div>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
