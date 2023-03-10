@@ -1,6 +1,7 @@
 import Minefield from './Minefield';
 import type { MinefieldInitialiserObject } from './Minefield';
 import Window from './Window';
+import SizeSelectorWindow, { MinefieldValues } from './SizeSelectorWindow';
 
 const presetOptions: { [level: string]: any } = {
   easy: {
@@ -61,8 +62,8 @@ export default class MinesweeperGame {
     this.newGameButton.addEventListener('click', () => this.startNewGame());
 
     dropdownMenuButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        this.openDropdownMenu(button);
+      button.addEventListener('click', event => {
+        if (event.target === button) this.openDropdownMenu(button);
       });
 
       button.addEventListener('mouseover', () => {
@@ -94,7 +95,12 @@ export default class MinesweeperGame {
     // add Window
     const popupWindowElement = parent.querySelector<HTMLDivElement>('#custom-size-select');
     if (popupWindowElement) {
-      this.customSizeWindow = new Window({ element: popupWindowElement, top: 100, left: 100 });
+      this.customSizeWindow = new SizeSelectorWindow({
+        element: popupWindowElement,
+        top: 100,
+        left: 100,
+        setSize: this.setSize,
+      });
     } else {
       console.error('no custom size selector element found, no custom sizes will be useable');
     }
@@ -122,4 +128,9 @@ export default class MinesweeperGame {
     this.dropdownMenuOpen = false;
     this.parentElement.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(menu => (menu.style.display = 'none'));
   }
+
+  public setSize = ({ width, height, mines: numberOfMines }: MinefieldValues) => {
+    this.gameOptions = { ...this.gameOptions, width, height, numberOfMines };
+    this.startNewGame();
+  };
 }

@@ -27,7 +27,25 @@
             <div class="window-title-bar">
               <span>Custom Size</span><button class="close-button edge-highlight">X</button>
             </div>
-            <div class="window-content">Choose your size</div>
+            <div class="window-content custom-size-form">
+              <span>Choose your size:</span>
+              <label
+                >Width
+                <input name="width" type="number" min="10" max="100" />
+              </label>
+              <label
+                >Height
+                <input name="height" type="number" min="10" max="100" />
+              </label>
+              <label
+                >Number of Mines
+                <input name="mines" type="number" min="5" max="999" />
+              </label>
+              <span class="button-wrapper">
+                <button class="edge-highlight ok-button" type="submit">OK</button>
+                <button class="edge-highlight cancel-button">Cancel</button>
+              </span>
+            </div>
           </div>
         </div>
         <div class="wrapper edge-highlight thick-border">

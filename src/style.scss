@@ -26,6 +26,12 @@ body {
   overflow-x: hidden;
 }
 
+button {
+  border-radius: 0px;
+  background-color: inherit;
+  border: none;
+}
+
 #game {
   background-color: lightgrey;
   display: inline-block;
@@ -110,7 +116,7 @@ body {
   height: 1.2rem;
   display: grid;
   place-content: center;
-  cursor: pointer;
+  cursor: default;
 }
 
 .hidden {
@@ -229,4 +235,18 @@ $colors_by_value: (
 
 .window-hidden {
   display: none !important;
+}
+
+.custom-size-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & .button-wrapper {
+    align-self: flex-end;
+  }
+
+  & button {
+    padding: 0.3rem 0.5rem;
+  }
 }
