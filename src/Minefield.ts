@@ -112,7 +112,9 @@ export default class Minefield {
 
   private endGame({ win }: { win: boolean }) {
     this.forEachChild(cell => cell.endGame({ win }));
-    this.timerIntervalId && clearInterval(this.timerIntervalId);
+    requestAnimationFrame(() => {
+      this.timerIntervalId && clearInterval(this.timerIntervalId);
+    });
   }
 
   private forEachChild(fn: (cell: Cell) => void) {
@@ -131,6 +133,10 @@ export default class Minefield {
 
   private startTimer() {
     if (this.timerDiv) {
+      if (this.timerIntervalId) {
+        this.timerDiv.innerText = '000';
+        clearInterval(this.timerIntervalId);
+      }
       this.timerIntervalId = setInterval(() => {
         const seconds = Number(this.timerDiv.innerText);
         this.timerDiv.innerText = (seconds + 1).toString().padStart(3, '0');
