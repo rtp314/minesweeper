@@ -94,7 +94,7 @@ export default class MinesweeperGame {
     // add Window
     const popupWindowElement = parent.querySelector<HTMLDivElement>('#custom-size-select');
     if (popupWindowElement) {
-      this.customSizeWindow = new Window({ element: popupWindowElement });
+      this.customSizeWindow = new Window({ element: popupWindowElement, top: 100, left: 100 });
     } else {
       console.error('no custom size selector element found, no custom sizes will be useable');
     }

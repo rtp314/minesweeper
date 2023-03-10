@@ -4,7 +4,7 @@ export type WindowInitialiser = {
   left?: number;
 };
 
-export default class Popup {
+export default class Window {
   windowElement: HTMLElement;
   x: number;
   y: number;
