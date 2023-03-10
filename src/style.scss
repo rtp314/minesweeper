@@ -249,4 +249,9 @@ $colors_by_value: (
   & button {
     padding: 0.3rem 0.5rem;
   }
+
+  & input {
+    padding: 0.3rem;
+    margin-left: 0.5rem;
+  }
 }
