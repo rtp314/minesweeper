@@ -23,6 +23,7 @@
 body {
   font-family: 'Windows 95';
   background-color: black;
+  overflow-x: hidden;
 }
 
 #game {
@@ -207,6 +208,7 @@ $colors_by_value: (
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    user-select: none;
 
     & > span {
       min-width: max-content;
