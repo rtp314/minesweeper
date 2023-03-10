@@ -6,6 +6,8 @@ export type WindowInitialiser = {
 
 export default class Window {
   windowElement: HTMLElement;
+  defaultX: number;
+  defaultY: number;
   x: number;
   y: number;
 
@@ -19,31 +21,28 @@ export default class Window {
 
     if (top) element.style.top = `${top}px`;
     if (left) element.style.left = `${left}px`;
-    titleBar.draggable = true;
 
     // assign variables
     this.windowElement = element;
-    this.x = top;
-    this.y = left;
+    this.x = this.defaultX = top;
+    this.y = this.defaultY = left;
 
     // add close button listener
     closeButton.addEventListener('click', () => this.hide());
 
     // add drag to move logic
-    titleBar.addEventListener('dragstart', event => {
-      const blankDragImage = document.createElement('span');
-      event.dataTransfer?.setDragImage(blankDragImage, 0, 0);
+    titleBar.addEventListener('mousedown', event => {
       const startX = event.clientX;
       const startY = event.clientY;
-      const handleMouseMove = (event: DragEvent) => {
+      const handleMouseMove = (event: MouseEvent) => {
         const deltaX = event.clientX - startX;
         const deltaY = event.clientY - startY;
         this.windowElement.style.left = `${this.x + deltaX}px`;
         this.windowElement.style.top = `${this.y + deltaY}px`;
       };
-      document.addEventListener('drag', handleMouseMove);
+      document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener(
-        'dragend',
+        'mouseup',
         event => {
           const deltaX = event.clientX - startX;
           const deltaY = event.clientY - startY;
@@ -53,7 +52,7 @@ export default class Window {
           this.windowElement.style.top = `${newY}px`;
           this.x = newX;
           this.y = newY;
-          document.removeEventListener('drag', handleMouseMove);
+          document.removeEventListener('mousemove', handleMouseMove);
         },
         {
           once: true,
@@ -68,5 +67,7 @@ export default class Window {
 
   public hide() {
     this.windowElement.classList.add('window-hidden');
+    this.x = this.defaultX;
+    this.y = this.defaultY;
   }
 }

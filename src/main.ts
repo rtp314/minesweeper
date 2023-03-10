@@ -9,6 +9,6 @@ if (minesweeperParentElement) {
 }
 
 const minesweeperWindowElement = document.querySelector<HTMLDivElement>('.window');
-if (minesweeperWindowElement) new Window({ element: minesweeperWindowElement });
+if (minesweeperWindowElement) new Window({ element: minesweeperWindowElement, top: 50, left: 50 });
 
 export default {};
