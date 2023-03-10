@@ -38,16 +38,20 @@ export default class Minefield {
     }
     this.generateMines(numberOfMines);
     this.generateValues();
-    this.parent.addEventListener('click', () => this.startTimer(), { once: true });
-    this.parent.addEventListener('mousedown', event => {
-      if (event.button === 0) {
-        this.buttonElement.style.setProperty('--image-position', 'top right');
-      }
-    });
-    this.parent.addEventListener('mouseup', () => {
-      this.buttonElement.style.cssText = '';
-    });
+    this.parent.addEventListener('click', this.startTimer, { once: true });
+    this.parent.addEventListener('mousedown', this.mouseDownListener);
+    this.parent.addEventListener('mouseup', this.mouseUpListener);
   }
+
+  private mouseDownListener = (event: MouseEvent) => {
+    if (event.button === 0) {
+      this.buttonElement.style.setProperty('--image-position', 'top right');
+    }
+  };
+
+  private mouseUpListener = () => {
+    this.buttonElement.style.cssText = '';
+  };
 
   public revealSurrounding(x: number, y: number) {
     const surroundingCells = this.getSurroundingCells(x, y);
@@ -129,9 +133,14 @@ export default class Minefield {
     this.timerIntervalId && clearInterval(this.timerIntervalId);
     this.timerDiv.innerText = '000';
     this.minesRemainingDiv.innerText = '000';
+    this.parent.removeEventListener('click', this.startTimer);
+    this.parent.removeEventListener('mousedown', this.mouseDownListener);
+    this.parent.removeEventListener('mouseup', this.mouseUpListener);
   }
 
-  private startTimer() {
+  private startTimer = () => {
+    console.log('starting timer');
+
     if (this.timerDiv) {
       if (this.timerIntervalId) {
         this.timerDiv.innerText = '000';
@@ -142,5 +151,5 @@ export default class Minefield {
         this.timerDiv.innerText = (seconds + 1).toString().padStart(3, '0');
       }, 1000);
     }
-  }
+  };
 }

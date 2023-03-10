@@ -129,8 +129,8 @@ export default class MinesweeperGame {
     this.parentElement.querySelectorAll<HTMLElement>('.dropdown-menu').forEach(menu => (menu.style.display = 'none'));
   }
 
-  public setSize = ({ width, height, mines: numberOfMines }: MinefieldValues) => {
-    this.gameOptions = { ...this.gameOptions, width, height, numberOfMines };
+  public setSize = (newValues: MinefieldValues) => {
+    this.gameOptions = { ...this.gameOptions, ...newValues };
     this.startNewGame();
   };
 }
