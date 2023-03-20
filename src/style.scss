@@ -255,3 +255,27 @@ $colors_by_value: (
     margin-left: 0.5rem;
   }
 }
+
+#minesweeper-button {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-width: 4rem;
+  align-items: center;
+  padding: 0.3rem;
+  background-color: transparent;
+
+  &:active {
+    outline: dashed 1px white;
+    background-color: rgba(169, 211, 225, 0.4);
+  }
+
+  & > img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  & span {
+    color: white;
+  }
+}
