@@ -22,8 +22,13 @@
             </div> </span
           ><span class="dropdown-menu-button"
             >Help
-            <div class="dropdown-menu"><button>How to play</button><button>About</button></div>
+            <div class="dropdown-menu">
+              <button id="how-to-play-button">How to play</button><button id="about-button">About</button>
+            </div>
           </span>
+
+          <!-- popup windows -->
+          <!-- custom game -->
           <div id="custom-size-select" class="window edge-highlight window-hidden">
             <div class="window-title-bar">
               <span>Custom Size</span><button class="close-button edge-highlight">X</button>
@@ -45,6 +50,35 @@
               <span class="button-wrapper">
                 <button class="edge-highlight ok-button" type="submit">OK</button>
                 <button class="edge-highlight cancel-button">Cancel</button>
+              </span>
+            </div>
+          </div>
+          <!-- about -->
+          <div id="about-window" class="window edge-highlight window-hidden">
+            <div class="window-title-bar"><span>About</span><button class="close-button edge-highlight">X</button></div>
+            <div class="window-content">
+              <p>Written by Samuel Reed, 2023.</p>
+              <p>Inspired by the game I sank far too much time into.</p>
+              <p>Written without any UI libraries, using HTML, SCSS, and Typescript.</p>
+              <p>This project was a fun experiment in writing OOP code instead of my normal functional code.</p>
+              <span class="button-wrapper">
+                <button class="edge-highlight ok-button" type="submit">OK</button>
+              </span>
+            </div>
+          </div>
+          <div id="how-to-play-window" class="window edge-highlight window-hidden">
+            <div class="window-title-bar">
+              <span>How To Play</span><button class="close-button edge-highlight">X</button>
+            </div>
+            <div class="window-content">
+              <p>Clear the mines by clicking on all the squares which are NOT mines.</p>
+              <p>
+                Right click to set a flag. A flagged square will not be clickable, stopping you from accidentally
+                detonating a mine.
+              </p>
+              <p>Middle click a number to open up all surrounding (non-flagged) squares.</p>
+              <span class="button-wrapper">
+                <button class="edge-highlight ok-button" type="submit">OK</button>
               </span>
             </div>
           </div>

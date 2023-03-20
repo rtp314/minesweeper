@@ -32,6 +32,8 @@ export default class MinesweeperGame {
   minefield: Minefield;
   dropdownMenuOpen = false;
   customSizeWindow: Window | null = null;
+  aboutWindow: Window | null = null;
+  howToPlayWindow: Window | null = null;
 
   constructor(parent: HTMLElement) {
     // check that necessary elements are present first, else throw an error
@@ -92,7 +94,24 @@ export default class MinesweeperGame {
       });
     });
 
-    // add Window
+    const howToPlayButton = parent.querySelector<HTMLButtonElement>('#how-to-play-button');
+    if (howToPlayButton) {
+      howToPlayButton.addEventListener('click', () => {
+        this.howToPlayWindow?.show();
+      });
+    } else {
+      console.error('no How To Play button element found in HTML');
+    }
+    const aboutButton = parent.querySelector<HTMLButtonElement>('#about-button');
+    if (aboutButton) {
+      aboutButton.addEventListener('click', () => {
+        this.aboutWindow?.show();
+      });
+    } else {
+      console.error('no About button element found in HTML');
+    }
+
+    // add Windows
     const popupWindowElement = parent.querySelector<HTMLDivElement>('#custom-size-select');
     if (popupWindowElement) {
       this.customSizeWindow = new SizeSelectorWindow({
@@ -103,6 +122,31 @@ export default class MinesweeperGame {
       });
     } else {
       console.error('no custom size selector element found, no custom sizes will be useable');
+    }
+
+    const aboutWindowElement = parent.querySelector<HTMLDivElement>('#about-window');
+    if (aboutWindowElement) {
+      this.aboutWindow = new Window({
+        element: aboutWindowElement,
+        top: 115,
+        left: 115,
+      });
+      const closeButton = aboutWindowElement.querySelector<HTMLButtonElement>('.ok-button');
+      closeButton?.addEventListener('click', () => this.aboutWindow?.hide());
+    } else {
+      console.error('no About window elements found');
+    }
+    const howToPlayElement = parent.querySelector<HTMLDivElement>('#how-to-play-window');
+    if (howToPlayElement) {
+      this.howToPlayWindow = new Window({
+        element: howToPlayElement,
+        top: 130,
+        left: 130,
+      });
+      const closeButton = howToPlayElement.querySelector<HTMLButtonElement>('.ok-button');
+      closeButton?.addEventListener('click', () => this.howToPlayWindow?.hide());
+    } else {
+      console.error('no How To Play window elements found');
     }
   }
 

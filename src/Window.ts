@@ -30,6 +30,9 @@ export default class Window {
     // add close button listener
     closeButton.addEventListener('click', () => this.hide());
 
+    // add optional cancel buttons
+    element.querySelectorAll('button');
+
     // add drag to move logic
     titleBar.addEventListener('mousedown', event => {
       const startX = event.clientX;

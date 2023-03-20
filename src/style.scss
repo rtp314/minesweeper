@@ -207,6 +207,7 @@ $colors_by_value: (
   top: 0;
   left: 0;
   background-color: var(--color-background);
+  width: 25rem;
 
   & .window-title-bar {
     color: var(--color-edge-highlight);
@@ -225,6 +226,16 @@ $colors_by_value: (
   & .window-content {
     padding: 1rem;
   }
+
+  & .button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.3rem;
+  }
+
+  & button {
+    padding: 0.4rem 0.6rem;
+  }
 }
 
 .close-button {
@@ -241,14 +252,6 @@ $colors_by_value: (
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  & .button-wrapper {
-    align-self: flex-end;
-  }
-
-  & button {
-    padding: 0.3rem 0.5rem;
-  }
 
   & input {
     padding: 0.3rem;
@@ -278,4 +281,8 @@ $colors_by_value: (
   & span {
     color: white;
   }
+}
+
+#minesweeper-window {
+  width: auto;
 }
